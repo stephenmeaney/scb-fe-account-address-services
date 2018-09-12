@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+  <account account_id="1" email="name1@email.com" first_name="fname1" last_name="lname1" />
+  <account account_id="2" email="name2@email.com" first_name="fname2" last_name="lname2" />
+  <account account_id="3" email="name3@email.com" first_name="fname3" last_name="lname3" />
+  <account account_id="4" email="name4@email.com" first_name="fname4" last_name="lname4" />
+</dataset>

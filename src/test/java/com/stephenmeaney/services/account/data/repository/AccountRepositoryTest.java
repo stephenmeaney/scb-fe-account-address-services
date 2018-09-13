@@ -36,9 +36,6 @@ public class AccountRepositoryTest {
     @Autowired
     AccountRepository accountRepository;
 
-    @Autowired
-    private TestEntityManager entityManager;
-
     @Test
     public void testRepositoryReturnsListOfAccounts() {
         List<Account> accountList = accountRepository.findAll();

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-  <account account_id="1" email="name1@email.com" first_name="fname1" last_name="lname1" />
-  <account account_id="2" email="name2@email.com" first_name="fname2" last_name="lname2" />
-  <account account_id="3" email="name3@email.com" first_name="fname3" last_name="lname3" />
-  <account account_id="4" email="name4@email.com" first_name="fname4" last_name="lname4" />
+    <account account_id="1" email="name1@email.com" first_name="fname1" last_name="lname1" />
+    <account account_id="2" email="name2@email.com" first_name="fname2" last_name="lname2" />
+    <account account_id="3" email="name3@email.com" first_name="fname3" last_name="lname3" />
+    <account account_id="4" email="name4@email.com" first_name="fname4" last_name="lname4" />
+    <address address_id="1" street="1 street" apt_building="1a" city="city1" state_province="aa" zip_postal_code="11111" country="USA" />
+    <address address_id="2" street="2 street" apt_building="2a" city="city2" state_province="bb" zip_postal_code="11112" country="USA" />
+    <address address_id="3" street="3 street" apt_building="3a" city="city3" state_province="cc" zip_postal_code="11113" country="USA" />
+    <address address_id="4" street="4 street" apt_building="4a" city="city4" state_province="dd" zip_postal_code="11114" country="USA" />
+
 </dataset>

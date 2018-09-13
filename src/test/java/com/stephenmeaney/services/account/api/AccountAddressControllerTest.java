@@ -1,6 +1,7 @@
 package com.stephenmeaney.services.account.api;
 
 import com.stephenmeaney.services.account.service.AccountService;
+import com.stephenmeaney.services.api.AccountAddressController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,12 +13,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
-
 @RunWith(SpringRunner.class)
-@WebMvcTest(AccountController.class)
-public class AccountControllerTest {
+@WebMvcTest(AccountAddressController.class)
+public class AccountAddressControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -26,7 +24,7 @@ public class AccountControllerTest {
     private AccountService accountService;
 
     @InjectMocks
-    private AccountController accountController;
+    private AccountAddressController accountAddressController;
 
     @Before
     public void setUp() throws Exception {

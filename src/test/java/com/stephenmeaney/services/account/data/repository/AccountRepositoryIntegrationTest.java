@@ -43,5 +43,4 @@ public class AccountRepositoryIntegrationTest {
         assertThat(foundAccount.getLastName()).isEqualTo("lastname");
         assertThat(foundAccount.getEmail()).isEqualTo("name@email.com");
     }
-
 }

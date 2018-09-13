@@ -3,18 +3,21 @@ package com.stephenmeaney.services.account.data.repository;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.stephenmeaney.services.account.data.entity.Account;
+import com.stephenmeaney.services.address.data.entity.Address;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,9 +36,8 @@ public class AccountRepositoryTest {
     @Autowired
     AccountRepository accountRepository;
 
-    @Before
-    public void setUp() throws Exception {
-    }
+    @Autowired
+    private TestEntityManager entityManager;
 
     @Test
     public void testRepositoryReturnsListOfAccounts() {
@@ -59,6 +61,7 @@ public class AccountRepositoryTest {
     @Test
     public void testFindById() {
         Account account = accountRepository.findById(1L);
+
         assertThat(account.getAccountId()).isEqualTo(1);
         assertThat(account.getFirstName()).isEqualTo("fname1");
         assertThat(account.getLastName()).isEqualTo("lname1");

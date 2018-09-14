@@ -34,7 +34,7 @@ public class AddressControllerTest {
     @Autowired
     private ObjectMapper mapper;
 
-    public Address createMockAddress(long num) {
+    private Address createMockAddress(long num) {
         Address mockAddress = new Address();
         mockAddress.setAddressId(1L);
         mockAddress.setStreet("street" + num);

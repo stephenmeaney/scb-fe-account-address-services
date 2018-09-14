@@ -44,7 +44,7 @@ public class AccountControllerTest {
     @Autowired
     private ObjectMapper mapper;
 
-    public Account createMockAccount(long num) {
+    private Account createMockAccount(long num) {
         Account mockAccount = new Account();
         mockAccount.setAccountId(num);
         mockAccount.setFirstName("first" + num);

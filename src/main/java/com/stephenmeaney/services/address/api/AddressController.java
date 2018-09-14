@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/v1/addresses")
 public class AddressController {
 
-    AddressService addressService;
+    private AddressService addressService;
 
     @Autowired
     public AddressController(AddressService addressService) {
@@ -42,8 +42,9 @@ public class AddressController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
+    public ResponseEntity<Address> delete(@PathVariable long id) {
         addressService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

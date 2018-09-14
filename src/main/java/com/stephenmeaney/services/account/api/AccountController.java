@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/v1/accounts")
 public class AccountController {
 
-    AccountService accountService;
+    private AccountService accountService;
 
     @Autowired
     public AccountController(AccountService accountService) {
@@ -43,8 +43,9 @@ public class AccountController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
+    public ResponseEntity<Account> delete(@PathVariable long id) {
         accountService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

@@ -101,7 +101,7 @@ public class AddressControllerTest {
     public void testDelete() throws Exception {
 
         mockMvc.perform(delete("/api/v1/addresses/3"))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
     }
 
 

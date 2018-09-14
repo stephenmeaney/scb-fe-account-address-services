@@ -33,7 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = AccountController.class, secure = false)
-//@Import(SecurityConfig.class)
 public class AccountControllerTest {
 
     @Autowired
@@ -44,14 +43,6 @@ public class AccountControllerTest {
 
     @Autowired
     private ObjectMapper mapper;
-
-    @InjectMocks
-    private AccountController accountController;
-
-    @Before
-    public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-    }
 
     public Account createMockAccount(long num) {
         Account mockAccount = new Account();

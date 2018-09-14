@@ -69,6 +69,4 @@ public class AddressRepositoryTest {
         assertThat(address.getCountry()).isEqualTo("USA");
     }
 
-
-
 }

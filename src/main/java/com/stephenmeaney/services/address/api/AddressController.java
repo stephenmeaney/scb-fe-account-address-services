@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/addresses")
+@RequestMapping("/api/v1/accounts")
 public class AddressController {
 
     private AddressService addressService;
@@ -21,30 +21,34 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @GetMapping("")
-    public List<Address> getAll() {
-        return addressService.getAll();
+    @GetMapping("/{accountId}/address")
+    public ResponseEntity<List<Address>> getAll(@PathVariable long accountId) {
+
+        return addressService.getAll(accountId);
     }
 
-    @GetMapping("/{id}")
-    public Address getById(@PathVariable long id) {
-        return addressService.getById(id);
+    @GetMapping("/{accountId}/address/{addressId}")
+    public ResponseEntity<Address> getById(@PathVariable long addressId, @PathVariable long accountId) {
+
+        return addressService.getById(addressId, accountId);
     }
 
-    @PostMapping("")
-    public ResponseEntity<Address> insert(@RequestBody Address address) {
-        return new ResponseEntity<>(addressService.insert(address), HttpStatus.CREATED);
+    @PostMapping("/{accountId}/address")
+    public ResponseEntity<Address> insert(@RequestBody Address address, @PathVariable long accountId) {
+
+        return addressService.insert(address, accountId);
     }
 
-    @PutMapping("/{id}")
-    public Address update(@PathVariable long id, @RequestBody Address address) {
-        return addressService.update(id, address);
+    @PutMapping("/{accountId}/address/{addressId}")
+    public ResponseEntity<Address> update(@RequestBody Address address, @PathVariable long addressId, @PathVariable long accountId) {
+
+        return addressService.update(address, addressId, accountId);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Address> delete(@PathVariable long id) {
-        addressService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/{accountId}/address/{addressId}")
+    public ResponseEntity<Address> delete(@PathVariable long addressId, @PathVariable long accountId) {
+
+        return addressService.delete(addressId, accountId);
     }
 
 }

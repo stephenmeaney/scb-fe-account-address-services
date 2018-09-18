@@ -64,4 +64,11 @@ public class AccountRepositoryTest {
         assertThat(account.getLastName()).isEqualTo("lname1");
         assertThat(account.getEmail()).isEqualTo("name1@email.com");
     }
+
+    @Test
+    public void testFindById_accountNotExist_returnsNull() {
+        Account account = accountRepository.findById(9999);
+
+        assertThat(account).isNull();
+    }
 }

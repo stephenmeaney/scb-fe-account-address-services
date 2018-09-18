@@ -1,8 +1,11 @@
 package com.stephenmeaney.services.address.service;
 
+import com.stephenmeaney.services.account.data.repository.AccountRepository;
 import com.stephenmeaney.services.address.data.entity.Address;
 import com.stephenmeaney.services.address.data.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,31 +14,54 @@ import java.util.List;
 public class AddressService {
 
     private AddressRepository addressRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
-    public AddressService(AddressRepository addressRepository) {
+    public AddressService(AddressRepository addressRepository, AccountRepository accountRepository) {
         this.addressRepository = addressRepository;
+        this.accountRepository = accountRepository;
     }
 
-    public Address getById(long id) {
-        return addressRepository.findById(id);
+    public ResponseEntity<List<Address>> getAll(long accountId) {
+        if (accountRepository.findById(accountId) != null) {
+            return new ResponseEntity<>(addressRepository.findAll(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    public List<Address> getAll() {
-        return addressRepository.findAll();
+    public ResponseEntity<Address> getById(long addressId, long accountId) {
+        if (accountRepository.findById(accountId) != null) {
+            return new ResponseEntity<>(addressRepository.findById(addressId), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    public Address insert(Address account) {
-        return addressRepository.save(account);
+    public ResponseEntity<Address> insert(Address address, long accountId) {
+        if (accountRepository.findById(accountId) != null) {
+            return new ResponseEntity<>(addressRepository.save(address), HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    public Address update(long id, Address newAccount) {
-        // would normally check contract for "id not found" behavior and how to handle incomplete entity
-        newAccount.setAddressId(id);
-        return addressRepository.save(newAccount);
+    public ResponseEntity<Address> update(Address newAddress, long addressId, long accountId) {
+        // check contract for "id not found" behavior and how to handle incomplete entity
+        if (accountRepository.findById(accountId) != null) {
+            newAddress.setAddressId(addressId);
+            return new ResponseEntity<>(addressRepository.save(newAddress), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    public void delete(long id) {
-        addressRepository.deleteById(id);
+    public ResponseEntity<Address> delete(long addressId, long accountId) {
+        if (accountRepository.findById(accountId) != null) {
+            addressRepository.deleteById(addressId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

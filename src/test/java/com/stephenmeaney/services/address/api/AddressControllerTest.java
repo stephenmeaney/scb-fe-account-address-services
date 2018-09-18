@@ -8,7 +8,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -36,7 +38,7 @@ public class AddressControllerTest {
 
     private Address createMockAddress(long num) {
         Address mockAddress = new Address();
-        mockAddress.setAddressId(1L);
+        mockAddress.setAddressId(num);
         mockAddress.setStreet("street" + num);
         mockAddress.setAptBuilding("apt" + num);
         mockAddress.setCity("city" + num);
@@ -48,15 +50,15 @@ public class AddressControllerTest {
     }
 
     @Test
-    public void testGetAll() throws Exception{
+    public void testGetAll() throws Exception {
 
         List<Address> mockAddressList = new ArrayList<>();
         mockAddressList.add(createMockAddress(1));
         mockAddressList.add(createMockAddress(2));
 
-        when(addressService.getAll()).thenReturn(mockAddressList);
+        when(addressService.getAll(1)).thenReturn(new ResponseEntity<>(mockAddressList, HttpStatus.OK));
 
-        mockMvc.perform(get("/api/v1/addresses"))
+        mockMvc.perform(get("/api/v1/accounts/1/address"))
                 .andExpect(status().isOk());
     }
 
@@ -65,9 +67,10 @@ public class AddressControllerTest {
 
         Address mockAddress = createMockAddress(3);
 
-        when(addressService.getById(3)).thenReturn(mockAddress);
+        when(addressService.getById(3, 1))
+                .thenReturn(new ResponseEntity<>(mockAddress, HttpStatus.OK));
 
-        mockMvc.perform(get("/api/v1/addresses/3"))
+        mockMvc.perform(get("/api/v1/accounts/1/address/3"))
                 .andExpect(status().isOk());
     }
 
@@ -76,9 +79,10 @@ public class AddressControllerTest {
 
         Address mockAddress = createMockAddress(4);
 
-        when(addressService.insert(any(Address.class))).thenReturn(mockAddress);
+        when(addressService.insert(any(Address.class), anyLong()))
+                .thenReturn(new ResponseEntity<>(mockAddress, HttpStatus.CREATED));
 
-        mockMvc.perform(post("/api/v1/addresses")
+        mockMvc.perform(post("/api/v1/accounts/1/address")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(mapper.writeValueAsString(mockAddress)))
                 .andExpect(status().isCreated());
@@ -89,9 +93,10 @@ public class AddressControllerTest {
 
         Address mockAddress = createMockAddress(1);
 
-        when(addressService.update(anyLong(), any(Address.class))).thenReturn(mockAddress);
+        when(addressService.update(any(Address.class), anyLong(), anyLong()))
+                .thenReturn(new ResponseEntity<>(mockAddress, HttpStatus.OK));
 
-        mockMvc.perform(put("/api/v1/addresses/2")
+        mockMvc.perform(put("/api/v1/accounts/1/address/4")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(mapper.writeValueAsString(mockAddress)))
                 .andExpect(status().isOk());
@@ -100,9 +105,10 @@ public class AddressControllerTest {
     @Test
     public void testDelete() throws Exception {
 
-        mockMvc.perform(delete("/api/v1/addresses/3"))
+        when(addressService.delete(anyLong(), anyLong()))
+                .thenReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT));
+
+        mockMvc.perform(delete("/api/v1/accounts/1/address/5"))
                 .andExpect(status().isNoContent());
     }
-
-
 }

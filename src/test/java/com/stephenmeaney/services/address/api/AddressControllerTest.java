@@ -31,7 +31,7 @@ public class AddressControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private AddressService addressService;
+    private AddressService mockAddressService;
 
     @Autowired
     private ObjectMapper mapper;
@@ -56,9 +56,9 @@ public class AddressControllerTest {
         mockAddressList.add(createMockAddress(1));
         mockAddressList.add(createMockAddress(2));
 
-        when(addressService.getAll(1)).thenReturn(new ResponseEntity<>(mockAddressList, HttpStatus.OK));
+        when(mockAddressService.getAll(1)).thenReturn(new ResponseEntity<>(mockAddressList, HttpStatus.OK));
 
-        mockMvc.perform(get("/api/v1/accounts/1/address"))
+        mockMvc.perform(get("/api/v1/accounts/1/addresses"))
                 .andExpect(status().isOk());
     }
 
@@ -67,10 +67,10 @@ public class AddressControllerTest {
 
         Address mockAddress = createMockAddress(3);
 
-        when(addressService.getById(3, 1))
+        when(mockAddressService.getById(3, 1))
                 .thenReturn(new ResponseEntity<>(mockAddress, HttpStatus.OK));
 
-        mockMvc.perform(get("/api/v1/accounts/1/address/3"))
+        mockMvc.perform(get("/api/v1/accounts/1/addresses/3"))
                 .andExpect(status().isOk());
     }
 
@@ -79,10 +79,10 @@ public class AddressControllerTest {
 
         Address mockAddress = createMockAddress(4);
 
-        when(addressService.insert(any(Address.class), anyLong()))
+        when(mockAddressService.insert(any(Address.class), anyLong()))
                 .thenReturn(new ResponseEntity<>(mockAddress, HttpStatus.CREATED));
 
-        mockMvc.perform(post("/api/v1/accounts/1/address")
+        mockMvc.perform(post("/api/v1/accounts/1/addresses")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(mapper.writeValueAsString(mockAddress)))
                 .andExpect(status().isCreated());
@@ -93,10 +93,10 @@ public class AddressControllerTest {
 
         Address mockAddress = createMockAddress(1);
 
-        when(addressService.update(any(Address.class), anyLong(), anyLong()))
+        when(mockAddressService.update(any(Address.class), anyLong(), anyLong()))
                 .thenReturn(new ResponseEntity<>(mockAddress, HttpStatus.OK));
 
-        mockMvc.perform(put("/api/v1/accounts/1/address/4")
+        mockMvc.perform(put("/api/v1/accounts/1/addresses/4")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(mapper.writeValueAsString(mockAddress)))
                 .andExpect(status().isOk());
@@ -105,10 +105,10 @@ public class AddressControllerTest {
     @Test
     public void testDelete() throws Exception {
 
-        when(addressService.delete(anyLong(), anyLong()))
+        when(mockAddressService.delete(anyLong(), anyLong()))
                 .thenReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT));
 
-        mockMvc.perform(delete("/api/v1/accounts/1/address/5"))
+        mockMvc.perform(delete("/api/v1/accounts/1/addresses/5"))
                 .andExpect(status().isNoContent());
     }
 }

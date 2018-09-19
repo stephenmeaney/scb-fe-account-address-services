@@ -21,31 +21,31 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @GetMapping("/{accountId}/address")
+    @GetMapping("/{accountId}/addresses")
     public ResponseEntity<List<Address>> getAll(@PathVariable long accountId) {
 
         return addressService.getAll(accountId);
     }
 
-    @GetMapping("/{accountId}/address/{addressId}")
+    @GetMapping("/{accountId}/addresses/{addressId}")
     public ResponseEntity<Address> getById(@PathVariable long addressId, @PathVariable long accountId) {
 
         return addressService.getById(addressId, accountId);
     }
 
-    @PostMapping("/{accountId}/address")
+    @PostMapping("/{accountId}/addresses")
     public ResponseEntity<Address> insert(@RequestBody Address address, @PathVariable long accountId) {
 
         return addressService.insert(address, accountId);
     }
 
-    @PutMapping("/{accountId}/address/{addressId}")
+    @PutMapping("/{accountId}/addresses/{addressId}")
     public ResponseEntity<Address> update(@RequestBody Address address, @PathVariable long addressId, @PathVariable long accountId) {
 
         return addressService.update(address, addressId, accountId);
     }
 
-    @DeleteMapping("/{accountId}/address/{addressId}")
+    @DeleteMapping("/{accountId}/addresses/{addressId}")
     public ResponseEntity<Address> delete(@PathVariable long addressId, @PathVariable long accountId) {
 
         return addressService.delete(addressId, accountId);

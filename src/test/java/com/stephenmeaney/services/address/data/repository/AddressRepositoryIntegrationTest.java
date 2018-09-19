@@ -22,7 +22,7 @@ public class AddressRepositoryIntegrationTest {
     @Autowired
     private AddressRepository addressRepository;
 
-    public Address createMockAddress() {
+    private Address createMockAddress() {
         Address mockAddress = new Address();
         mockAddress.setStreet("street1");
         mockAddress.setAptBuilding("1b");

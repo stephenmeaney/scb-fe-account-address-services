@@ -154,7 +154,7 @@ public class AddressServiceTest {
         when(mockAccountRepository.findById(anyLong())).thenReturn(null);
         when(mockAddressRepository.save(any(Address.class))).thenReturn(new Address());
 
-        Address returnedAddress = addressService.getById(1L, 1L).getBody();
+        Address returnedAddress = addressService.insert(new Address(), 1L).getBody();
 
         assertThat(returnedAddress).isNull();
     }

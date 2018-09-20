@@ -1,5 +1,6 @@
 package com.stephenmeaney.services.account.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.stephenmeaney.services.address.data.entity.Address;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Account {
     private String email;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = {"account"})
     private List<Address> addressList;
 
     public long getAccountId() {

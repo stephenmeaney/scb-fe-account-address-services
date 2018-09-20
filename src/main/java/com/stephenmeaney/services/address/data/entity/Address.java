@@ -1,5 +1,7 @@
 package com.stephenmeaney.services.address.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.stephenmeaney.services.account.data.entity.Account;
 
 import javax.persistence.*;
@@ -25,6 +27,7 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name = "account_id")
+    @JsonIgnoreProperties(value = {"addressList"})
     private Account account;
 
     public long getAddressId() {

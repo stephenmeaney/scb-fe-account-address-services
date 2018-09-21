@@ -1,5 +1,6 @@
 package com.stephenmeaney.services.address.api;
 
+import com.stephenmeaney.services.address.data.AddressSummary;
 import com.stephenmeaney.services.address.data.entity.Address;
 import com.stephenmeaney.services.address.data.entity.Address;
 import com.stephenmeaney.services.address.service.AddressService;
@@ -49,6 +50,11 @@ public class AddressController {
     public ResponseEntity<Address> delete(@PathVariable long addressId, @PathVariable long accountId) {
 
         return addressService.delete(addressId, accountId);
+    }
+
+    @GetMapping("/{accountId}/addresses/{addressId}/summary")
+    public ResponseEntity<AddressSummary> getSummary(@PathVariable long addressId, @PathVariable long accountId) {
+        return addressService.getSummary(addressId, accountId);
     }
 
 }

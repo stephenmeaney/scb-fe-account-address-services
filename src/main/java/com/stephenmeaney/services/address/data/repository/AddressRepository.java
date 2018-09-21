@@ -1,5 +1,6 @@
 package com.stephenmeaney.services.address.data.repository;
 
+import com.stephenmeaney.services.address.data.AddressSummary;
 import com.stephenmeaney.services.address.data.entity.Address;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -12,4 +13,6 @@ public interface AddressRepository extends CrudRepository<Address, Long> {
     List<Address> findAll();
 
     Address findById(long id);
+
+    AddressSummary findAllProjectedByAddressId(long id);
 }

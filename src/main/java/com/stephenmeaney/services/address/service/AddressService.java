@@ -2,6 +2,7 @@ package com.stephenmeaney.services.address.service;
 
 import com.stephenmeaney.services.account.data.entity.Account;
 import com.stephenmeaney.services.account.data.repository.AccountRepository;
+import com.stephenmeaney.services.address.data.AddressSummary;
 import com.stephenmeaney.services.address.data.entity.Address;
 import com.stephenmeaney.services.address.data.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,15 @@ public class AddressService {
         if (accountRepository.findById(accountId) != null) {
             addressRepository.deleteById(addressId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public ResponseEntity<AddressSummary> getSummary(long addressId, long accountId) {
+        if (accountRepository.findById(accountId) != null) {
+            addressRepository.findAllProjectedByAddressId(addressId);
+            return new ResponseEntity<>(addressRepository.findAllProjectedByAddressId(addressId), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

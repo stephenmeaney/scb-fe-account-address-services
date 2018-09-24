@@ -7,7 +7,7 @@ import com.stephenmeaney.services.address.service.AddressServiceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-//@RunWith(Suite.class)
-//@Suite.SuiteClasses ({AddressControllerTest.class, AddressRepositoryTest.class, AddressRepositoryIntegrationTest.class, AddressServiceTest.class})
+@RunWith(Suite.class)
+@Suite.SuiteClasses ({AddressControllerTest.class, AddressRepositoryTest.class, AddressRepositoryIntegrationTest.class, AddressServiceTest.class})
 public class AddressTestSuite {
 }

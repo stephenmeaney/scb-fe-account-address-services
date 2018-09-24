@@ -7,8 +7,8 @@ import com.stephenmeaney.services.account.service.AccountServiceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-//@RunWith(Suite.class)
-//@Suite.SuiteClasses ({AccountControllerTest.class, AccountRepositoryTest.class, AccountRepositoryIntegrationTest.class, AccountServiceTest.class})
+@RunWith(Suite.class)
+@Suite.SuiteClasses ({AccountControllerTest.class, AccountRepositoryTest.class, AccountRepositoryIntegrationTest.class, AccountServiceTest.class})
 public class AccountTestSuite {
 
 }

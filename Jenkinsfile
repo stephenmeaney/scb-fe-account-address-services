@@ -14,6 +14,7 @@ pipeline {
         }
         stage('Deploy'){
             steps{
+                sh 'cf'
                 sh 'cf push'
             }
         }

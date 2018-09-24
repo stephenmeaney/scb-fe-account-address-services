@@ -34,6 +34,10 @@ public class AccountRepositoryIntegrationTest {
         account.setEmail("name@email.com");
         account.setAddressList(new ArrayList<Address>());
 
+        if (accountRepository.findById(1L) != null) {
+            accountRepository.deleteById(1L);
+        }
+
         entityManager.persistAndFlush(account);
 
         Account foundAccount = accountRepository.findById(1L);

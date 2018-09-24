@@ -38,6 +38,10 @@ public class AddressRepositoryIntegrationTest {
     public void testPersistData() {
         Address mockAddress = createMockAddress();
 
+        if (addressRepository.findById(1L) != null) {
+            addressRepository.deleteById(1L);
+        }
+
         entityManager.persistAndFlush(mockAddress);
 
         Address foundAddress = addressRepository.findById(1L);

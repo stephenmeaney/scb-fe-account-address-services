@@ -14,8 +14,7 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                sh 'cf'
-                sh 'cf push'
+                pushToCloudFoundry cloudSpace: 'smeaney-cnt', credentialsId: 'PivotalWebServices', organization: 'solstice-org', target: 'api.run.pivotal.io'
             }
         }
     }
